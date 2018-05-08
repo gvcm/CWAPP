@@ -1,0 +1,3 @@
+if exist "%programfiles%\google\chrome\application\chrome.exe" start "chrome" "%programfiles%\google\chrome\application\chrome.exe" "%~dp0%index.html" --new-window --allow-file-access-from-files
+if exist "%programfiles(x86)%\google\chrome\application\chrome.exe" start "chrome" "%programfiles(x86)%\google\chrome\application\chrome.exe" "%~dp0%index.html" --new-window --allow-file-access-from-files
+exit

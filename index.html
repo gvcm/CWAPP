@@ -1,0 +1,3285 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Crystal Walk</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta charset="utf-8" type="text/css"/>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        
+        <!-- Icon -->
+        <link rel="icon" type="image/png" href="Images/tab-icon.png" />
+ 
+		<!-- jQuery Plugin Set -->
+		<!-- <script src="vendor/jquery.js"></script> -->
+
+		<!-- jQuery UI Plugin Set -->
+		<link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.css"/> 
+		<!-- <script src="vendor/jquery-ui/jquery-ui.js"></script> -->
+		<!-- <script src="vendor/jquery-ui/jquery.easing.js"></script> -->
+         
+        <!-- Bootstrap JS -->
+		<!-- <script src="vendor/bootstrap/assets/javascripts/bootstrap.js"></script> -->
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="styles/bootstrap.css"/>
+		<link rel="stylesheet" href="vendor/icheck/skins/square/grey.css"/>
+		<link rel="stylesheet" href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css"/>
+		<link rel="stylesheet" href="vendor/malihu-custom-scrollbar/jquery.mCustomScrollbar.css"/>
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="styles/project-theme.css"/>
+        <link rel="stylesheet" href="styles/spectrum.css"/>
+        <link rel="stylesheet" href="styles/jquery.tagit.css"/>
+		 
+		<!--[if gte IE 6]>
+			<script src="assets/js/externals/css3-mediaqueries.min.js"></script>
+			<script src="assets/js/externals/html5shiv.js"></script>
+			<script src="assets/js/externals/placeholders.min.js"></script>
+			<script src="assets/js/externals/respond.js"></script>
+			<script src="assets/js/externals/selectivizr-min.js"></script>
+		<![endif]-->
+		<script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-69768434-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+        
+	</head>
+	<body class="custom_scrollbar">
+        
+                    <!-- Tutorial -->
+                    <div class="bravais-lattice-modal-container">
+                        <div class="modal bravais-lattice-modal" id="tutorialBox">
+                            <div class="modal-dialog" role="document" id="">
+                                <div class="modal-content">
+                                    <div class="modal-header mega-header grayHeader" id="tutorialHeader">
+                                        <span id="steps"><img src="Images/steps.png" class="imgClose img-responsive" alt=""/></span>
+                                        <div class="modal-title-container" id="tutorialLabel">
+                                            <h2>Step-By-Step Tutorial</h2>
+                                        </div>
+                                        <div class="btn-close">
+                                            <button id="closeTutorial" type="button" class="btn btn-primary" aria-label="Close">
+                                                <span><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="tutorial_body" class="tab-block visualization-block block-pad-sm theme-light">
+                                            <div class="block-content">
+                                                <div class="visualization-blocks-container">
+                                                    <div class="row row-1_0">
+                                                        <div class="col col-xs-12 col-sm-12">
+                                                            <div id="tutorial_text">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="tutorial_next" class="btn btn-dark-02" data-dismiss="modal">Next Step</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+        <!-- Progress Bar Element -->
+        <div id="progressBarWrapper">
+            <div id="loaderWrapper">
+                <div class="sk-cube-grid">
+                   <div id="loaderCircle">
+                        <div class="sk-cube sk-cube1"></div>
+                        <div class="sk-cube sk-cube2"></div>
+                        <div class="sk-cube sk-cube3"></div>
+                        <div class="sk-cube sk-cube4"></div>
+                        <div class="sk-cube sk-cube5"></div>
+                        <div class="sk-cube sk-cube6"></div>
+                        <div class="sk-cube sk-cube7"></div>
+                        <div class="sk-cube sk-cube8"></div>
+                        <div class="sk-cube sk-cube9"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="progressLabel">LOADING 3D SCENES...</div>
+        </div>
+    
+        <!-- Main Screen -->
+        <div id="screenWrapper">
+            <!-- Canvasses -->
+            <main id="cnt_main_screen" class="main-screen-container">
+                <div id="app-container">
+                    <!-- Swap Button -->
+                    <div id="swapBtn" data-toggle="tooltip" data-placement="left">
+                        <img src="Images/swap.png" />
+                    </div>
+                    
+                    <div id="menuMobile">
+                        <!-- Hide Menu Button -->
+                        <div id="showIcon" data-toggle="tooltip" data-placement="left">
+                            <img src="Images/show-icon.png" />
+                        </div>
+                        <!-- CardBoard Button -->
+                        <div id="cardBoardCanvas" data-toggle="tooltip" data-placement="left">
+                            <img src="Images/stereoscope-switch-icon-03-hover.png" />
+                        </div>
+                    </div>
+                    
+                    <!-- Canvas Tooltip -->
+                    <div id="canvasTooltip"></div>
+                    <!-- Individual Atom Controller -->
+                    <div class="bravais-lattice-modal-container">
+                        <div class="modal bravais-lattice-modal" id="iacBox">
+                            <div class="modal-dialog" role="document" id="infoModalDialog">
+                                <div class="modal-content">
+                                    <div class="modal-header mega-header purpleHeader" id="infoHeader">
+                                        <div class="modal-title-container" id="iacLabel">
+                                            <h2>Atom #37</h2>
+                                        </div>
+                                        <div class="btn-close">
+                                            <button id="iacClose" type="button" class="btn btn-primary" aria-label="Close">
+                                                <span><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="iacBody" class="tab-block visualization-block block-pad-sm theme-light">
+                                            <div class="block-content">
+                                                <div class="visualization-blocks-container">
+                                                    <div class="row row-1_0">
+                                                        <div class="col col-xs-12 col-sm-12">
+                                                            <div class="action action-toggle-visiblity" id="iacToggle">
+                                                                <a><img src="Images/visible-icon-sm.png" class="img-responsive" alt=""/></a>
+                                                            </div>
+                                                            <div class="element-symbol-container" id="iacSymbol">
+                                                                <div class="element-box">
+                                                                    <a class="ch ch-o">O</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="visualization-block" id="iacRadius">
+                                                                <div class="visualization-block-content">
+                                                                    <div class="color-picker-container">
+                                                                        <div class="color-label form-group-label">
+                                                                            <label id="radiusLabel">Radius</label>
+                                                                            <br />
+                                                                            <label id="radiusLabelValue"> 150 &Aring;</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="action action-toggle-visiblity" id="iacDoll">
+                                                                <a><img src="Images/doll.png" class="img-responsive" alt=""/></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row row-1_0">
+                                                        <div class="col col-xs-2 col-sm-2">
+                                                            <div class="visualization-block" id="iacColorWrapper">
+                                                                <div class="visualization-block-content">
+                                                                    <div class="color-picker-container">
+                                                                        <div class="color-label form-group-label">
+                                                                            <label for="txt_color">Color</label>
+                                                                        </div>
+                                                                        <div id="iacColor" class="color-picker color-picker-lg theme-01 bg-transparent ">
+                                                                            <div class="color"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col-xs-6 col-sm-6 visualization-block-iac">
+                                                            <div class="slider-group form-group">
+                                                                <div class="slider-detail">
+                                                                    <div class="slider-label form-group-label">
+                                                                        <label for="txt_visualization_radius">Opacity</label>
+                                                                    </div>
+                                                                    <div class="slider-input form-group-input theme-dark margTop6">
+                                                                        <input type="text" id="iacOpacity" class="form-control"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="slider-control slider-control-sm theme-dark">
+                                                                    <div class="slider" id="iacOpacitySlider"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col-xs-2 col-sm-2">
+                                                            <div class="action action-toggle-visiblity" id="iacSound">
+                                                                <a class="experimental"><img src="Images/sound-icon-hover.png" class="img-responsive" alt=""/></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col-xs-2 col-sm-2">
+                                                            <div class="action action-toggle-visiblity" id="iacNotes">
+                                                                <a><img src="Images/notes-icon-white.png" class="img-responsive" alt=""/></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Atom Radius Slider -->
+                    <div class="slider-group form-group theme-dark disabled" id="atomRadiusSliderContainer">
+                        <div class="row">
+                            <p id="atomRadiusLabel"> Atom Radius</p>
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="slider-control slider-control-lg" id="atomRadiusControls">
+                                    <div class="slider" id="atomRadiusSlider"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Labels -->
+                    <div id="xLabel" class="axesLabel"></div>
+                    <div id="yLabel" class="axesLabel"></div>
+                    <div id="zLabel" class="axesLabel"></div>
+                    <div id="aLabel" class="axesLabel hiddenLabel"></div>
+                    <div id="bLabel" class="axesLabel hiddenLabel"></div>
+                    <div id="cLabel" class="axesLabel hiddenLabel"></div> 
+              
+                    <!-- Canvasses -->
+                    <div id="unitCellRenderer" ></div>
+                    <div id="crystalRenderer">
+                        <div id="hudRenderer"></div> 
+                        <div id="hudRendererCube"></div>
+                        <!-- Logo needs to be here for PNG export --> 
+                        <div id="appLogo">
+                            <img src="Images/cwlogo.png" />
+                        </div>
+                    </div>
+                    <div id="topRowTable">
+                        <div id="unitCellRendererMouse"></div>
+                        <div id="motifVisibilityInUC">
+                            <img src="Images/motif-icon.png" />
+                        </div>
+                        <div id="crystalRendererMouse"></div>
+                        <div id="lockCameraIcon" class="active">
+                            <img src="Images/lockCamerasActive.png" />
+                        </div>
+                    </div>  
+                    <div id="topRowTableCaption">
+                        <div id="unitCellRendererCaption" class="motifBorderTop motifBorderLeft"><h1>UNIT CELL&nbsp;</h1></div>
+                        <div id="crystalRendererCaption" class="motifBorderTop motifBorderLeft motifBorderRight"><h1>CRYSTAL&nbsp;</h1></div>
+                    </div>
+                    <div id="motifRenderer"></div> 
+                    <div id="motifScreenTable">
+                        <div id="motifPosX"></div>
+                        <div id="motifPosY"></div>
+                        <div id="motifPosZ"></div> <!-- class="motifPosScreen" -->
+                    </div> 
+                    <div id="motifScreenTableCaption">
+                        <div id="motifPosXCaption" class="motifBorderTop motifBorderBottom motifBorderLeft"><h1>MOTIF Y AXIS&nbsp;</h1></div>
+                        <div id="motifPosYCaption" class="motifBorderTop motifBorderBottom motifBorderLeft"><h1>MOTIF X AXIS&nbsp;</h1></div>
+                        <div id="motifPosZCaption" class="motifBorderTop motifBorderBottom motifBorderLeft motifBorderRight"><h1>MOTIF Z AXIS&nbsp;</h1></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Menu -->
+        <section class="main-controls-container controls-close" id="main_controls_container">
+			<div class="main-controls-inner">
+				<div class="main-controls-wrapper">
+					<div class="row row-nopad">
+                        
+						<div class="col col-xs-2 col-sm-2">
+							<article class="controls-controller">
+								<div class="controls-toggler-container">
+									<a id="controls_toggler" class="btn btn-block btn-primary">
+										<span class="img-open"><img src="Images/open-icon.png" class="img-responsive" alt=""/></span>
+										<span class="img-close"><img src="Images/close-icon.png" class="img-responsive" alt=""/></span>
+									</a>
+								</div>
+								<div class="controller-tab-controls">
+									<nav class="main-tab-nav-container">
+										<ul id="list" class="nav nav-pills" role="tablist">
+											<li role="presentation" class="active" id="latticeTab">
+												<a href="#scrn_lattice" class="control-open" aria-controls="scrn_lattice" role="tab" data-toggle="tab">
+													<img src="Images/lattice-icon.png" class="img-responsive" alt=""/>
+													<img src="Images/lattice-icon-hover.png" class="img-responsive hover" alt=""/>
+												</a>
+											</li>
+											<li role="presentation" class="" id="motifLI">
+												<a href="#scrn_motif" class="control-open" aria-controls="scrn_motif" role="tab" data-toggle="tab">
+													<img src="Images/motif-icon.png" class="img-responsive" alt=""/>
+													<img src="Images/motif-icon-hover.png" class="img-responsive hover" alt=""/>
+												</a>
+											</li>
+											<li role="presentation" class="" id="visualTab">
+												<a href="#scrn_visualize" class="control-open" aria-controls="scrn_visualize" role="tab" data-toggle="tab">
+													<img src="Images/visualize-icon.png" class="visualIcon img-responsive" alt=""/>
+													<img src="Images/visualize-icon-hover.png" class=" visualIconimg-responsive hover" alt=""/>
+												</a>
+											</li>
+											<li role="presentation" class="" id="millerPI">
+												<a href="#scrn_pnd" class="control-open" aria-controls="scrn_pnd" role="tab" data-toggle="tab">
+													<img src="Images/pnd-icon.png" class="img-responsive" alt=""/>
+													<img src="Images/pnd-icon-hover.png" class="img-responsive hover" alt=""/>
+												</a>
+											</li>
+                                            <li role="presentation" class="" id="notesTab">
+												<a href="#notes_tab" class="control-open" aria-controls="notes_tab" role="tab" data-toggle="tab">
+													<img src="Images/comments.png" class="img-responsive" alt=""/>
+                                                    <img src="Images/comments-purple.png" class="img-responsive hover" alt=""/>
+												</a>
+											</li>
+											<li role="presentation" class="" id="publicTab">
+												<a href="#scrn_public_library" class="control-open" aria-controls="scrn_public_library" role="tab" data-toggle="tab">
+													<img src="Images/public-library-icon.png" class="img-responsive" alt=""/>
+													<img src="Images/public-library-icon-hover.png" class="img-responsive hover" alt=""/>
+												</a>
+											</li>
+                                            <li role="presentation" class="" id="helpTab">
+												<a id="" class="">
+													<img src="Images/help.png" class="img-responsive" alt=""/>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+								<div class="controller-toggle-controls">
+									<nav class="main-toggle-nav-container">
+										<ul class="list-unstyled">
+											<li class="list-title">Toggle</li>
+                                            <li>
+												<a class="control-open toggle_menu lightTheme" data-toggle="tooltip" data-placement="left">
+                                                    <button id="xyzAxes" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+											<li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="abcAxes" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+											<li>
+												<a class="control-open toggle_menu lightTheme" data-toggle="tooltip" data-placement="left">
+                                                    <button id="latticePoints" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+											<li>
+												<a class="control-open toggle_menu lightTheme" data-toggle="tooltip" data-placement="left">
+                                                    <button id="edges" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+											<li>
+												<a class="control-open toggle_menu lightTheme" data-toggle="tooltip" data-placement="left">
+                                                    <button id="faces" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+                                            <li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="planes" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+											<li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="directions" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+											<li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="atomRadius" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+											<li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="atomToggle" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+                                            <li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="highlightTangency" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+                                            <li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="labelToggle" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+                                            <li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="unitCellViewport" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+                                            <li>
+												<a data-toggle="tooltip" class="control-open toggle_menu lightTheme" data-placement="left">
+													<button id="fullScreen" class="toggleButton" type="button"></button>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</article>
+						</div>
+						<div class="col col-xs-10 col-sm-10" id="controls_tabs_container">
+							<div class="controls-tabs-container">
+								<div class="tab-content">
+									
+									<div role="tabpanel" class="tab-pane lattice-tab-pane fade in active" id="scrn_lattice">
+										<div class="tab-content-container">
+                                            <div class="tab-section-title">
+                                                <h3>Bravais Lattice Parameters</h3>
+                                            </div>
+											<div class="tab-content-section-container">
+												<div class="tab-blocks-container">
+													<div class="tab-block bravais-block block-pad-sm theme-light">
+														<div class="block-title">
+															<h3>Bravais Lattice</h3>
+														</div>
+														<div class="block-content">
+															<div class="block-btn">
+																<a id="selected_lattice" class="btn btn-purple mh_title_box" data-toggle="modal" data-target="#bravais_lattice_modal" data-mh="mh_title_box">Choose a Lattice</a>
+															</div>
+                                                            <div id="latticePadlock" class="block-icon mh_title_box" data-mh="mh_title_box">
+                                                                <a class="btn" data-toggle="button" aria-pressed="false" autocomplete="off"></a>
+                                                            </div>
+														</div>
+													</div>
+													<div class="tab-block repetition-block block-pad-sm theme-dark">
+														<div class="block-title">
+															<h3>Bravais Lattice Repetition</h3>
+														</div>
+														<div class="block-content">
+															<div class="spinners-container">
+																<div class="row row-4">
+																	
+																	<div class="col col-xs-4 col-sm-4">
+																		<div class="spinner-group theme-dark form-group">
+																			<div class="spinner-label form-group-label">
+																				<label for="txt_lattice_repetition_x">x</label>
+																			</div>
+																			<div class="spinner-input form-group-input">
+																				<input type="text" id="repeatZ" class="spinner form-control"/>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col col-xs-4 col-sm-4">
+																		<div class="spinner-group theme-dark form-group">
+																			<div class="spinner-label form-group-label">
+																				<label for="txt_lattice_repetition_y">y</label>
+																			</div>
+																			<div class="spinner-input form-group-input">
+																				<input type="text" id="repeatX" class="spinner form-control"/>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col col-xs-4 col-sm-4">
+																		<div class="spinner-group theme-dark form-group">
+																			<div class="spinner-label form-group-label">
+																				<label for="txt_lattice_repetition_z">z</label>
+																			</div>
+																			<div class="spinner-input form-group-input">
+																				<input type="text" id="repeatY" class="spinner form-control"/>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-block length-block block-pad-sm theme-light">
+                                                        <div class="row">
+															<div class="col col-xs-10 col-sm-10">
+                                                                <div id="latticeContainer" class="mh_lattice_length_para_box" data-mh="mh_lattice_length_para_box">
+                                                                    <div class="block-title">
+                                                                        <h3>Bravais Lattice Length</h3>
+                                                                    </div>
+                                                                    <div class="block-content">
+                                                                        <div class="sliders-container">
+                                                                            <div class="slider-group form-group theme-dark">
+                                                                                <div class="row">
+
+                                                                                    <div class="col col-xs-4 col-sm-4">
+                                                                                        <div class="slider-detail">
+                                                                                            <div class="slider-label form-group-label">
+                                                                                                <label for="txt_lattice_length_a_01">a</label>
+                                                                                            </div>
+                                                                                            <div class="slider-input form-group-input">
+                                                                                                <input id="scaleZ" type="text" name="txt_lattice_length_a_01" class="form-control"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xs-8 col-sm-8">
+                                                                                        <div class="slider-control slider-control-lg">
+                                                                                            <div class="slider" id="scaleZSlider">
+                                                                                                <div id="scaleZShift"></div>
+                                                                                                <div id="scaleZCollision"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="slider-group form-group theme-dark">
+                                                                                <div class="row">
+
+                                                                                    <div class="col col-xs-4 col-sm-4">
+                                                                                        <div class="slider-detail">
+                                                                                            <div class="slider-label form-group-label">
+                                                                                                <label for="txt_lattice_length_b_01">b</label>
+                                                                                            </div>
+                                                                                            <div class="slider-input form-group-input">
+                                                                                                <input id="scaleX" type="text" name="txt_lattice_length_b_01" class="form-control"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col col-xs-8 col-sm-8">
+                                                                                        <div class="slider-control slider-control-lg">
+                                                                                            <div class="slider" id="scaleXSlider">
+                                                                                                <div id="scaleXShift"></div>
+                                                                                                <div id="scaleXCollision"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="slider-group form-group theme-dark">
+                                                                                <div class="row">
+
+                                                                                    <div class="col col-xs-4 col-sm-4">
+                                                                                        <div class="slider-detail">
+                                                                                            <div class="slider-label form-group-label">
+                                                                                                <label for="txt_lattice_length_c_01">c</label>
+                                                                                            </div>
+                                                                                            <div class="slider-input form-group-input">
+                                                                                                <input id="scaleY" type="text" name="txt_lattice_length_c_01"  class="form-control"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col col-xs-8 col-sm-8">
+                                                                                        <div class="slider-control slider-control-lg">
+                                                                                            <div class="slider" id="scaleYSlider">
+                                                                                                <div id="scaleYShift"></div>
+                                                                                                <div id="scaleYCollision"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="block-title" id="angleTitle">
+                                                                        <h3>Bravais Lattice Angle</h3>
+                                                                    </div>
+                                                                    <div class="block-content">
+                                                                        <div class="sliders-container">
+                                                                            <div class="slider-group form-group theme-dark">
+                                                                                <div class="row">
+
+                                                                                    <div class="col col-xs-4 col-sm-4">
+                                                                                        <div class="slider-detail">
+                                                                                            <div class="slider-label form-group-label">
+                                                                                                <label for="txt_lattice_angle_alpha_01">&alpha;</label>
+                                                                                            </div>
+                                                                                            <div class="slider-input form-group-input">
+                                                                                                <input id="beta" type="text" name="txt_lattice_angle_alpha_01" id="txt_lattice_angle_alpha_01" class="form-control"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col col-xs-8 col-sm-8">
+                                                                                        <div class="slider-control slider-control-lg">
+                                                                                            <div class="slider" id="betaSlider">
+                                                                                                <div id="betaShift"></div>
+                                                                                                <div id="betaCollision"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="slider-group form-group theme-dark">
+                                                                                <div class="row">
+
+                                                                                    <div class="col col-xs-4 col-sm-4">
+                                                                                        <div class="slider-detail">
+                                                                                            <div class="slider-label form-group-label">
+                                                                                                <label for="txt_lattice_angle_beta_01">&beta;</label>
+                                                                                            </div>
+                                                                                            <div class="slider-input form-group-input">
+                                                                                                <input id="alpha" type="text" name="txt_lattice_angle_beta_01" id="txt_lattice_angle_beta_01" class="form-control"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col col-xs-8 col-sm-8">
+                                                                                        <div class="slider-control slider-control-lg">
+                                                                                            <div class="slider" id="alphaSlider">
+                                                                                                <div id="alphaShift"></div>
+                                                                                                <div id="alphaCollision"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="slider-group form-group theme-dark">
+                                                                                <div class="row">
+
+                                                                                    <div class="col col-xs-4 col-sm-4">
+                                                                                        <div class="slider-detail">
+                                                                                            <div class="slider-label form-group-label">
+                                                                                                <label for="txt_lattice_angle_gamma_01">&gamma;</label>
+                                                                                            </div>
+                                                                                            <div class="slider-input form-group-input">
+                                                                                                <input id="gamma" type="text" name="txt_lattice_angle_gamma_01" id="txt_lattice_angle_gamma_01" class="form-control"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col col-xs-8 col-sm-8">
+                                                                                        <div class="slider-control slider-control-lg">
+                                                                                            <div class="slider" id="gammaSlider">
+                                                                                                <div id="gammaShift"></div>
+                                                                                                <div id="gammaCollision"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xs-2 col-sm-2">
+                                                                <div id="motifPadlock" class="lock-icon-container mh_lattice_length_para_box" data-mh="mh_lattice_length_para_box">
+                                                                    <a class="btn" data-toggle="button" aria-pressed="false" autocomplete="off"></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-footer latticeButtons">
+                                                            <div class="motif-bottom-action-bar-container bottom-action-bar-container">
+                                                                <div class="row row-1">
+
+                                                                    <div class="col col-xs-6 col-sm-6">
+                                                                        <div id="latticePreview" class="action action-toggle-visiblity previewAtomChanges">
+                                                                            <a><img src="Images/refresh.png" class="img-responsive" alt=""/></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col col-xs-6 col-sm-6">
+                                                                        <div id="latticeAutoRefresh" class="autoRefresh action action-save">
+                                                                            <a>aut<img src="Images/refresh.png" class="img-responsive" alt=""/></a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+													</div>
+                                                    
+												</div>
+											</div>
+                                            <div class="tab-section-title">
+                                                <h3>CELL VISUALIZATION PARAMETERS</h3>
+                                            </div>
+                                            <div class="tab-content-section-container">
+												<div class="tab-blocks-container">
+                                                    <div class="tab-block visualization-block block-pad-sm theme-dark">
+														<div class="block-content">
+															<div class="visualization-blocks-container">
+																<div class="row row-5">
+																	
+																	<div class="col col-xs-6 col-sm-6">
+																		<div class="visualization-block">
+																			<div class="visualization-block-checkbox">
+																				<label for="chkbx_visualization_cell_edge">
+																					<input type="checkbox" name='gridCheckButton' id="chkbx_visualization_cell_edge" class="icheckbox"/>Cell Edge
+																				</label>
+																			</div>
+																			<div class="visualization-block-content">
+																				<div class="color-box">
+																					<div class="color-box-inner">
+																						<div class="box-title">
+																							<p>Color</p>
+																						</div>
+																						<div id="cube_color_border" class="box-image">
+                                                                                            <img src="Images/cube-border.png" class="img-responsive" alt=""/>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="slider-group form-group">
+																					<div class="slider-detail">
+																						<div class="slider-label form-group-label">
+																							<label for="txt_visualization_radius">Radius</label>
+																						</div>
+																						<div class="slider-input form-group-input theme-dark">
+																							<input type="text" name="txt_visualization_radius" id="radius" class="form-control"/>
+																						</div>
+																					</div>
+																					<div class="slider-control slider-control-sm theme-dark">
+																						<div class="slider" id="radiusSlider"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col col-xs-6 col-sm-6">
+																		<div class="visualization-block">
+																			<div class="visualization-block-checkbox">
+																				<label for="chkbx_visualization_cell_face">
+																					<input type="checkbox" name="faceCheckButton" id="chkbx_visualization_cell_face" class="icheckbox"/>Cell Face
+																				</label>
+																			</div>
+																			<div class="visualization-block-content">
+																				<div class="color-box">
+																					<div class="color-box-inner">
+																						<div class="box-title">
+																							<p>Color</p>
+																						</div>
+																						<div id="cube_color_filled" class="box-image">
+                                                                                            <img src="Images/cube-filled.png" class="img-responsive" alt=""/>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="slider-group form-group">
+																					<div class="slider-detail">
+																						<div class="slider-label form-group-label">
+																							<label for="txt_visualization_opacity">Opacity</label>
+																						</div>
+																						<div class="slider-input form-group-input theme-dark">
+																							<input type="text" name="txt_visualization_opacity" id="faceOpacity" class="form-control"/>
+																						</div>
+																					</div>
+																					<div class="slider-control slider-control-sm theme-dark">
+																						<div class="slider" id="faceOpacitySlider"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane motif-tab-pane fade" id="scrn_motif">
+										<div class="tab-content-container">
+											<div class="tab-content-section-container">
+												<div class="tab-section-title">
+													<h3>MOTIF'S ATOM COORDINATES</h3>
+												</div>
+												<div class="tab-blocks-container">
+													<div class="tab-block">
+														<div class="tab-boxes-container">
+															
+															<div class="tab-box">
+																<div class="box-head">
+																	<div class="motif-top-action-bar-container">
+																		<div class="action action-add-new" id="atomPalette">
+																			<a id="atomPalettett" data-toggle="modal" data-target="#periodic_table_modal"><img src="Images/add-new-icon.png" class="img-responsive" alt=""/></a>
+																		</div>
+																		<div class="purpleTheme purpleThemeActive action action-donot-overlap">
+																			<a id="tangency"><img src="Images/do-not-overlap-icon.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-body">
+																	<div class="section-head-container">
+																		<div class="section-title">
+																			<h3>Coordinates</h3>
+																		</div>
+																	</div>
+                                                                    <!--
+                                                                    <div class="section-head-container">
+																		<div class="section-head-action-btns-container">
+                                                                            <div class="btn-action">
+																				<a id="atomPositioningAuto" class="btn btn-purple-light">AUTO</a>
+																			</div>
+																			<div class="btn-action">
+																				<a id="atomPositioningXYZ" class="btn btn-light">VECTORIAL</a>
+																			</div>
+																			<div class="btn-action">
+																				<a id="atomPositioningABC" class="btn btn-light">ABSOLUT</a>
+																			</div>
+																		</div>
+																	</div>
+                                                                    -->
+																	<div class="sliders-symbol-container">
+																		<div class="row row-10">
+																			
+																			<div class="col col-xs-9 col-sm-9">
+																				<div class="sliders-container">
+																					<div class="slider-group form-group theme-light">
+																						<div class="row row-10">
+																							
+																							<div class="col col-xs-5 col-sm-5">
+																								<div class="slider-detail">
+																									<div class="slider-label form-group-label">
+																										<label for="txt_coordinates_x">a</label>
+																									</div>
+																									<div class="slider-input form-group-input">
+																										<input id="atomPosZ" type="text" name="txt_coordinates_x" id="txt_coordinates_x" class="form-control"/>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="col col-xs-7 col-sm-7">
+																								<div class="slider-control slider-control-sm">
+																									<div class="slider" id="atomPosZSlider">
+                                                                                                        <div id="atomPosZShift"></div>
+                                                                                                        <div id="atomPosZCollision"></div>
+                                                                                                    </div>
+																								</div>
+																							</div>
+
+																						</div>
+																					</div>
+																					<div class="slider-group form-group theme-light">
+																						<div class="row row-10">
+																							
+																							<div class="col col-xs-5 col-sm-5">
+																								<div class="slider-detail">
+																									<div class="slider-label form-group-label">
+																										<label for="txt_coordinates_y">b</label>
+																									</div>
+																									<div class="slider-input form-group-input">
+																										<input id="atomPosX" type="text" name="txt_coordinates_y" id="txt_coordinates_y" class="form-control"/>
+																									</div>
+																								</div>
+																							</div>
+
+																							<div class="col col-xs-7 col-sm-7">
+																								<div class="slider-control slider-control-sm">
+																									<div class="slider" id="atomPosXSlider">
+                                                                                                        <div id="atomPosXShift"></div>
+                                                                                                        <div id="atomPosXCollision"></div>
+                                                                                                    </div>
+																								</div>
+																							</div>
+
+																						</div>
+																					</div>
+																					<div class="slider-group form-group theme-light">
+																						<div class="row row-10">
+																							
+																							<div class="col col-xs-5 col-sm-5">
+																								<div class="slider-detail">
+																									<div class="slider-label form-group-label">
+																										<label for="txt_coordinates_z">c</label>
+																									</div>
+																									<div class="slider-input form-group-input">
+																										<input id="atomPosY" type="text" name="txt_coordinates_z" id="txt_coordinates_z" class="form-control"/>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="col col-xs-7 col-sm-7">
+																								<div class="slider-control slider-control-sm">
+																									<div class="slider" id="atomPosYSlider">
+                                                                                                        <div id="atomPosYShift"></div>
+                                                                                                        <div id="atomPosYCollision"></div>
+                                                                                                    </div>
+																								</div>
+																							</div>
+
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col col-xs-3 col-sm-3">
+																				<div class="element-symbol-container" id="elementSymbolContainer">
+																					<div class="element-box">
+																						<a data-toggle="modal" data-target="#periodic_table_modal" class="ch ch-ci">ci</a>
+																					</div>
+                                                                                    <div id="custom_radii">
+    																				</div>
+                                                                                </div>
+																			</div>
+
+																		</div>
+																	</div>
+																	<div class="color-properties-container">
+																		<div class="row row-10">
+																			<div class="col col-xs-9 col-sm-9">
+																				<div class="row row-10">
+																					
+																					<div class="col col-xs-3 col-sm-3">
+																						<div class="color-picker-container">
+																							<div class="color-label form-group-label">
+																								<label for="txt_color">Color</label>
+																							</div>
+																							<div id="atomColor" class="color-picker color-picker-lg theme-01 bg-transparent">
+																								<div class="color"></div>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="col col-xs-9 col-sm-9">
+																						<div class="sliders-container opacity-slider-container">
+																							<div class="slider-group form-group opacity-slider theme-light">
+																								<div class="slider-detail">
+																									<div class="slider-label form-group-label">
+																										<label for="txt_color_opacity">Opacity</label>
+																									</div>
+																									<div class="slider-input form-group-input">
+																										<input type="text" name="txt_color_opacity" id="atomOpacity" class="form-control"/>
+																									</div>
+																								</div>
+																								<div class="slider-control slider-control-sml">
+																									<div class="slider" id="atomOpacitySlider"></div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div id="rotAngleSection" class="tangent-properties-container">
+																		<div class="par-properties-container">
+																			<div class="par-properties-wrapper">
+																				<div class="row row-4">
+																					
+																					<div class="col col-xs-4 col-sm-4">
+																						<div class="par-group theme-light">
+																							<div class="par-label form-group-label">
+																								<label for="txt_par_theta">&theta;</label>
+																							</div>
+																							<div class="par-input form-group-input theme-light">
+																								<input type="text" name="txt_par_theta" id="rotAngleTheta" class="form-control"/>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="col col-xs-4 col-sm-4">
+																						<div class="par-group theme-light">
+																							<div class="par-label form-group-label">
+																								<label for="txt_par_phi">&phi;</label>
+																							</div>
+																							<div class="par-input form-group-input theme-light">
+																								<input type="text" name="txt_par_phi" id="rotAnglePhi" class="form-control"/>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="col col-xs-4 col-sm-4">
+																						<div class="par-group theme-light">
+																							<div class="par-label form-group-label">
+																								<label for="txt_par_rad">r</label>
+																							</div>
+																							<div class="par-input form-group-input theme-light">
+																								<input type="text" name="txt_par_rad" id="tangentR" class="form-control"/>
+																							</div>
+																						</div>
+																					</div>
+
+																				</div>
+																			</div>
+																		</div>
+																		<div class="abg-poperties-container">
+																			<div class="abg-properties-wrapper">
+																				<div class="row row-5">
+																					
+																					<div class="col col-xs-4 col-sm-4">
+																						<div class="abg-block">
+																							<p>&alpha;: <span id="rotAngleX">-</span></p>
+																						</div>
+																					</div>
+																					<div class="col col-xs-4 col-sm-4">
+																						<div class="abg-block">
+																							<p>&beta;: <span id="rotAngleY">-</span></p>
+																						</div>
+																					</div>
+																					<div class="col col-xs-4 col-sm-4">
+																						<div class="abg-block">
+																							<p>&gamma;: <span id="rotAngleZ">-</span></p>
+																						</div>
+																					</div>
+
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-footer">
+																	<div class="motif-bottom-action-bar-container bottom-action-bar-container">
+																		<div class="row row-1">
+																			
+																			<div class="col col-xs-6 col-sm-6">
+																				<div class="action action-toggle-visiblity previewAtomChanges">
+																					<a id="motifAuto"><img src="Images/refresh.png" class="img-responsive" alt=""/></a>
+																				</div>
+																			</div>
+																			<div class="col col-xs-6 col-sm-6">
+																				<div class="saveAtomChanges action action-save">
+																					<a id="saveAtomChanges"><img src="Images/save-icon-sm.png" class="img-responsive" alt=""/></a>
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="tab-box items-box" id="atomTable">
+																<div class="box-body">
+																	<div class="items-table-wrapper custom_scrollbar">
+																		<div class="items-table-container">
+																			<table id="tableAtom" class="table items-table" >
+																				<tbody></tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-footer">
+																	<div class="item-table-action">
+																		<div id="deleteAtom" class="action action-delete">
+																			<a><img src="Images/delete-icon.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="tab-content-section-container">
+												<div class="tab-section-title">
+													<h3>Lattice Parameters</h3>
+												</div>
+												<div class="tab-blocks-container">
+													<div class="tab-block">
+														<div class="tab-boxes-container">
+                                                            
+                                                            <div class="tab-box lattice-parameters-box" id="scaleBox">
+                                                                <div class="box-body">
+																	<div class="row row-nopad">
+                                                                        <div class="col col-xs-12 col-sm-12">
+																			<div class="slider-blocks-container mh_lattice_length_para_box" data-mh="mh_lattice_length_para_box">
+                                                                                <div class="slider-block">
+                                                                                    <div class="block-title">
+                                                                                        <h3>Uniform Lattice Scaling</h3>
+                                                                                    </div>
+                                                                                    <div class="block-content">
+                                                                                        <div class="sliders-container">
+                                                                                            <div class="slider-group form-group theme-light">
+                                                                                                <div class="row row-10">
+
+                                                                                                    <div class="col col-xs-5 col-sm-5">
+                                                                                                        <div class="slider-detail" id="scaleLabel">
+                                                                                                            <div class="slider-label form-group-label">
+                                                                                                                <label for="txt_lattice_scaling">volume %</label>
+                                                                                                            </div>
+                                                                                                            <div class="slider-input form-group-input">
+                                                                                                                <input id="cellVolume" type="text" name="txt_lattice_scaling" class="form-control"/>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col col-xs-7 col-sm-7">
+                                                                                                        <div class="slider-control slider-control-sm" id="scaleSlider">
+                                                                                                            <div id="cellVolumeSlider" class="slider">
+                                                                                                                <div id="cellVolumeShift"></div>
+                                                                                                                <div id="cellVolumeCollision"></div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="tab-box lattice-parameters-box" id="parametersBox">
+                                                                <div class="box-body">
+																	<div class="row row-nopad">
+                                                                        <div class="col col-xs-12 col-sm-12">
+																			<div class="slider-blocks-container mh_lattice_length_para_box" data-mh="mh_lattice_length_para_box">
+                                                                                <div class="slider-block">
+                                                                                    <div class="block-title small">
+                                                                                        <h3>Lattice Length</h3>
+                                                                                    </div>
+                                                                                    <div class="block-content">
+                                                                                        <div class="sliders-container">
+                                                                                            <div class="slider-group form-group theme-light">
+                                                                                                <div class="row row-12">
+
+                                                                                                    <div class="col col-xs-4 col-sm-4 latticeLabel">
+                                                                                                        <div class="slider-detail">
+                                                                                                            <div class="slider-label form-group-label">
+                                                                                                                <label>a :&nbsp;</label><label id="meLengthA">-</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col col-xs-4 col-sm-4 latticeLabel">
+                                                                                                        <div class="slider-detail">
+                                                                                                            <div class="slider-label form-group-label">
+                                                                                                                <label>b :&nbsp;</label><label id="meLengthB">-</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col col-xs-4 col-sm-4 latticeLabel">
+                                                                                                        <div class="slider-detail">
+                                                                                                            <div class="slider-label form-group-label">
+                                                                                                                <label>c :&nbsp;</label><label id="meLengthC">-</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="box-body">
+																	<div class="row row-nopad">
+                                                                        <div class="col col-xs-12 col-sm-12">
+																			<div class="slider-blocks-container mh_lattice_length_para_box" data-mh="mh_lattice_length_para_box">
+                                                                                <div class="slider-block">
+                                                                                    <div class="block-title small">
+                                                                                        <h3>Lattice Angle</h3>
+                                                                                    </div>
+                                                                                    <div class="block-content">
+                                                                                        <div class="sliders-container">
+                                                                                            <div class="slider-group form-group theme-light">
+                                                                                                <div class="row row-12">
+
+                                                                                                    <div class="col col-xs-4 col-sm-4 latticeLabel">
+                                                                                                        <div class="slider-detail">
+                                                                                                            <div class="slider-label form-group-label">
+                                                                                                                <label>α :&nbsp;</label><label id="meAngleA">-</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col col-xs-4 col-sm-4 latticeLabel">
+                                                                                                        <div class="slider-detail">
+                                                                                                            <div class="slider-label form-group-label">
+                                                                                                                <label>β :&nbsp;</label><label id="meAngleB">-</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col col-xs-4 col-sm-4 latticeLabel">
+                                                                                                        <div class="slider-detail">
+                                                                                                            <div class="slider-label form-group-label">
+                                                                                                                <label>γ :&nbsp;</label><label id="meAngleG">-</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane pnd-tab-pane fade" id="scrn_pnd">
+                                        <div class="tab-content-container">
+											<div class="tab-content-section-container">
+												<div class="tab-section-title">
+													<h3>CRYSTAL PLANES PARAMETERS</h3>
+												</div>
+												<div class="tab-blocks-container">
+													<div class="tab-block">
+														<div class="tab-boxes-container">
+															
+															<div class="tab-box">
+																<div class="box-head">
+																	<div class="pnd-top-action-bar-container">
+																		<div id="newPlane" class="action action-add-new">
+																			<a id="newPlanett"><img src="Images/planes-add.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-body">
+																	<div class="row row-nopad">
+																		
+																		<div class="col col-xs-10 col-sm-10">
+																			<div id="planesTooltip" class="coordinates-pnd-blocks-container mh_pnd_para_box" data-mh="mh_pnd_para_box" data-toggle="tooltip" data-placement="top">
+																				<div class="coordinates-block">
+																					<div class="block-title">
+																						<h3 id="subPlane">MILLER INDICES - (hkl) COORIDNATES</h3>
+																					</div>
+																					<div class="block-content">
+																						<div class="coordinates-properties-container">
+																							<div class="row row-10">
+                                                                                                
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_h">h</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_h" id="millerH" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_k">k</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_k" id="millerK" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_l">l</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_l" id="millerL" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+                                                                                <div class="coordinates-block" id="hexICoord">
+																					
+																					<div class="block-content">
+																						<div class="coordinates-properties-container">
+																							<div class="row row-10">
+                                                                                                <div class="col col-xs-4 col-sm-4">
+                                                                                                    &nbsp;
+                                                                                                </div>
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_i">i</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_i" id="millerI" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="pnd-detail-block">
+																					<div class="block-content">
+																						<div class="pnd-detail-container">
+																							<div class="row row-2">
+																								
+																								<div class="col col-xs-6 col-sm-6">
+																									<div class="pnd-group theme-light">
+																										<div class="pnd-label form-group-label">
+																											<label for="txt_pnd_name">Name</label>
+																										</div>
+																										<div class="pnd-input form-group-input theme-light">
+																											<input type="text" name="txt_pnd_name" id="planeName" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col col-xs-6 col-sm-6">
+																									<div class="row row-2">
+																										
+																										<div class="col col-xs-5 col-sm-5">
+																											<div class="color-picker-container">
+																												<div class="color-label form-group-label">
+																													<label for="txt_color">Color</label>
+																												</div>
+																												<div id="planeColor" class="color-picker color-picker-lg theme-01 bg-transparent ">
+																													<div class="color"></div>
+																												</div>
+																											</div>
+																										</div>
+																										<div class="col col-xs-7 col-sm-7">
+																											<div class="pnd-group theme-light">
+																												<div class="pnd-label form-group-label">
+																													<label for="txt_pnd_opacity">Opacity</label>
+																												</div>
+																												<div class="pnd-select form-group-input theme-light">
+																													<select id="planeOpacity" class="select-picker" style="display:none">
+																														
+																													</select>
+																												</div>
+																											</div>
+																										</div>
+
+																									</div>
+																								</div>
+
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+                                                                        
+																		<div class="col col-xs-2 col-sm-2">
+																			<div id="savePlane" class="disabled action action-save">
+																				<a class="mh_pnd_para_box" data-mh="mh_pnd_para_box"><img src="Images/save-icon-sm.png" class="img-responsive" alt=""/></a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-footer">
+
+																</div>
+															</div>
+															<div class="tab-box pnd-box" id="planesTable">
+																<div class="box-body">
+																	<div class="pnd-table-wrapper custom_scrollbar" id="pnd_table_wrapper">
+																		<div class="pnd-table-container">
+																			<table class="table pnd-table">
+																				<tbody></tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-footer">
+																	<div class="item-table-action">
+																		<div id="deletePlane" class="disabled action action-delete">
+																			<a id="deletePlanett"><img src="Images/delete-icon.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="tab-content-section-container">
+												<div class="tab-section-title">
+													<h3>CRYSTAL DIRECTIONS PARAMETERS</h3>
+												</div>
+												<div class="tab-blocks-container">
+													<div class="tab-block">
+														<div class="tab-boxes-container">
+															
+															<div class="tab-box">
+																<div class="box-head">
+																	<div class="pnd-top-action-bar-container">
+																		<div class="action action-add-new" id="newDirection">
+																			<a id="newDirectiontt"><img src="Images/add-new-directions-icon.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-body">
+																	<div class="row row-nopad">
+																		
+																		<div class="col col-xs-10 col-sm-10">
+																			<div id="directionsTooltip" class="coordinates-pnd-blocks-container mh_pnd_para_box" data-mh="mh_pnd_para_box" data-toggle="tooltip" data-placement="top">
+																				<div class="coordinates-block">
+																					<div class="block-title">
+																						<h3 id="subDirection">MILLER INDICES - [uvw] COORIDNATES</h3>
+																					</div>
+																					<div class="block-content">
+																						<div class="coordinates-properties-container">
+																							<div class="row row-10">
+																								
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_h">u</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_h" class="form-control" id="millerU"/>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_k">v</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_k" class="form-control" id="millerV"/>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_l">w</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_l" class="form-control" id="millerW"/>
+																										</div>
+																									</div>
+																								</div>
+
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+                                                                                <div class="coordinates-block" id="hexTCoord">
+																					
+																					<div class="block-content">
+																						<div class="coordinates-properties-container">
+																							<div class="row row-10">
+                                                                                                <div class="col col-xs-4 col-sm-4">
+                                                                                                    &nbsp;
+                                                                                                </div>
+																								<div class="col col-xs-4 col-sm-4">
+																									<div class="coordinates-group theme-light">
+																										<div class="coordinates-label form-group-label">
+																											<label for="txt_coordinates_i">t</label>
+																										</div>
+																										<div class="coordinates-input form-group-input theme-light">
+																											<input type="text" name="txt_coordinates_t" id="millerT" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="pnd-detail-block">
+																					<div class="block-content">
+																						<div class="pnd-detail-container">
+																							<div class="row row-2">
+																								
+																								<div class="col col-xs-6 col-sm-6">
+																									<div class="pnd-group theme-light">
+																										<div class="pnd-label form-group-label">
+																											<label for="txt_pnd_name">Name</label>
+																										</div>
+																										<div class="pnd-input form-group-input theme-light">
+																											<input type="text" name="txt_pnd_name" id="directionName" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col col-xs-6 col-sm-6">
+																									<div class="row row-2">
+																										
+																										<div class="col col-xs-5 col-sm-5">
+																											<div class="color-picker-container">
+																												<div class="color-label form-group-label">
+																													<label for="txt_color">Color</label>
+																												</div>
+																												<div id="directionColor" class="color-picker color-picker-lg theme-01 bg-transparent">
+																													<div class="color"></div>
+																												</div>
+																											</div>
+																										</div>
+																										<div class="col col-xs-7 col-sm-7">
+																											<div class="pnd-group theme-light">
+																												<div class="pnd-label form-group-label">
+																													<label for="txt_pnd_opacity">Radius</label>
+																												</div>
+																												<div class="pnd-select form-group-input theme-light">
+																													<select id="dirRadius" class="select-picker" style="display:none">
+																												
+																													</select>
+																												</div>
+																											</div>
+																										</div>
+
+																									</div>
+																								</div>
+
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col col-xs-2 col-sm-2">
+																			<div id="saveDirection" class="disabled action action-save">
+																				<a class="mh_pnd_para_box" data-mh="mh_pnd_para_box"><img src="Images/save-icon-sm.png" class="img-responsive" alt=""/></a>
+																			</div>
+																		</div>
+
+																	</div>
+																</div>
+																<div class="box-footer">
+
+																</div>
+															</div>
+															<div class="tab-box pnd-box" id="directionTable">
+																<div class="box-body">
+																	<div class="pnd-table-wrapper custom_scrollbar" id="pnd_table_wrapper">
+																		<div class="pnd-table-container">
+																			<table class="table pnd-table">
+																				<tbody></tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-footer">
+																	<div class="item-table-action">
+																		<div id="deleteDirection" class="disabled action action-delete">
+																			<a id="deleteDirectiontt"><img src="Images/delete-icon.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    
+									<div role="tabpanel" class="tab-pane pnd-tab-pane fade" id="notes_tab">
+										<div class="tab-content-container">
+											<div class="tab-content-section-container">
+												<div class="tab-section-title">
+													<h3>Comments &amp; Narratives</h3>
+												</div>
+												<div class="tab-blocks-container">
+													<div class="tab-block">
+														<div class="tab-boxes-container">
+															
+															<div class="tab-box">
+																<div class="box-head">
+																	<div class="pnd-top-action-bar-container">
+																		<div id="newNote" class="action action-add-new">
+																			<a id="newNotett"><img src="Images/addNote.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-body">
+																	<div class="row row-nopad">
+																		
+																		<div class="col col-xs-10 col-sm-10">
+																			<div class="coordinates-pnd-blocks-container mh_pnd_para_box" data-mh="mh_pnd_para_box" data-toggle="tooltip" data-placement="top">
+                                                                                <div class="pnd-detail-block">
+																					<div class="block-content">
+																						<div class="pnd-detail-container">
+																							<div class="row row-2">
+																								
+																								<div class="col col-xs-6 col-sm-6">
+																									<div class="pnd-group theme-light">
+																										<div class="pnd-label form-group-label">
+																											<label for="txt_pnd_name">Title</label>
+																										</div>
+																										<div class="pnd-input form-group-input theme-light">
+																											<input type="text" name="txt_pnd_name" id="noteTitle" class="form-control"/>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="col col-xs-6 col-sm-6">
+																									<div class="row row-2">
+																										
+																										<div class="col col-xs-5 col-sm-5">
+																											<div class="color-picker-container">
+																												<div class="color-label form-group-label">
+																													<label for="txt_color">Color</label>
+																												</div>
+																												<div id="noteColor" class="color-picker color-picker-lg theme-01 bg-transparent ">
+																													<div class="color"></div>
+																												</div>
+																											</div>
+																										</div>
+																										<div class="col col-xs-7 col-sm-7">
+																											<div class="pnd-group theme-light">
+																												<div class="pnd-label form-group-label">
+																													<label for="txt_pnd_opacity">Opacity</label>
+																												</div>
+																												<div class="pnd-select form-group-input theme-light">
+																													<select id="noteOpacity" class="select-picker" style="display:none">
+																														
+																													</select>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+                                                                                <div class="pnd-detail-block">
+																					<div class="block-content">
+																						<div class="pnd-detail-container">
+																							<div class="row row-2">
+																								
+																								<div class="col col-xs-12 col-sm-12">
+																									<div class="pnd-group theme-light">
+																										<div class="pnd-label form-group-label">
+																											<label for="txt_pnd_name">Note</label>
+																										</div>
+																										<div class="pnd-input form-group-input theme-light">
+																											<textarea class="form-control" id="noteBody"></textarea>
+																										</div>
+                                                                                                        <div id="saveCamera" class="active">
+                                                                                                            <img src="Images/comments-hover.png" />
+                                                                                                        </div>
+                                                                                                        <div id="enableParameters" class="active">
+                                                                                                            <img src="Images/motif-icon-white.png" />
+                                                                                                        </div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+                                                                        
+																		<div class="col col-xs-2 col-sm-2">
+																			<div id="saveNote" class="disabled action action-save">
+																				<a class="mh_pnd_para_box" data-mh="mh_pnd_para_box"><img src="Images/save-icon-sm.png" class="img-responsive" alt=""/></a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+                                                            
+																<div class="box-footer">
+                                                                    <div class="row row-nopad">
+                                                                        <div class="col col-xs-3 col-sm-3">
+                                                                            <div class="block-title">
+                                                                                <h3 id="playerSliderTitle">Interval</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row row-nopad">
+                                                                        <div class="col col-xs-3 col-sm-3">
+                                                                            <div class="sliders-container density-slider-container pad15">
+                                                                                <div class="block-content lodLabel">
+                                                                                    <div class="slider-input form-group-input">
+                                                                                        <input id="interval" type="text" name="txt_visualize_color_density" id="txt_visualize_color_density" class="form-control"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col col-xs-9 col-sm-9">
+                                                                            <div class="slider-group form-group density-slider theme-light">
+                                                                                <div class="slider-control slider-control-sm">
+                                                                                    <div class="slider" id="playerSlider"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="player item-table-action">
+																		<div id="play" class="fLeft action action-delete">
+																			<a class=" playerButton"><img src="Images/play.png" class="img-responsive" alt=""/></a>
+																		</div>
+                                                                        <div id="pause" class="fLeft action action-delete">
+																			<a class=" playerButton"><img src="Images/pause.png" class="img-responsive" alt=""/></a>
+																		</div> 
+                                                                        <div id="rewind" class="fLeft action action-delete">
+																			<a class=" playerButton"><img src="Images/rewind.png" class="img-responsive" alt=""/></a>
+																		</div>
+                                                                        <div id="forward" class="fLeft action action-delete">
+                                                                            <a class=" playerButton"><img src="Images/forward.png" class="img-responsive" alt=""/></a>
+                                                                        </div>
+                                                                        <div id="repeat" class="fLeft action action-delete">
+																			<a class="playerButton active"><img src="Images/repeat.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="tab-box pnd-box" id="notesTable">
+																<div class="box-body">
+																	<div class="pnd-table-wrapper custom_scrollbar" id="pnd_table_wrapper">
+																		<div class="pnd-table-container">
+																			<table class="table pnd-table">
+																				<tbody></tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-footer">
+																	<div class="item-table-action">
+																		<div id="deleteNote" class="disabled action action-delete">
+																			<a id="deleteNotett"><img src="Images/delete-icon.png" class="img-responsive" alt=""/></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane public-library-tab-pane fade" id="scrn_public_library">
+										<div class="tab-content-container">
+                                            
+											<div class="tab-content-section-container public-project-section">
+												<div class="tab-section-title">
+													<h3>LOAD A SAVED CRYSTALWALK PROJECT</h3>
+												</div>
+												<div class="tab-blocks-container">
+													<div class="tab-block">
+														<div class="tab-boxes-container">
+															
+															<div class="tab-box">
+                                                                
+																<div class="box-body">
+																	<div class="project-search-form-container">
+																		<form id="searchField">
+																			<div class="form-group">
+																				<input id="searchQuery" type="text" class="form-control" placeholder="Name, Tags, Description" name="project"/>
+																			</div>
+																			<div class="btn-search">
+																				<button class="btn btn-purple-dark"><img src="Images/search-icon.png" class="img-responsive" alt="Search"/></button>
+																			</div>
+																		</form>
+																	</div>
+                                                                    <div class="loader" id="databaseLoader"></div>
+                                                                    <div class="project-blocks-container">
+                                                                        <div class="row row-5">
+                                                                            <div class="searchCat" id="searchName">
+                                                                                <a></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="project-blocks-container">
+                                                                        <div class="row row-5">
+                                                                            <div class="searchCat" id="searchDesc">
+                                                                                <a></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="project-blocks-container">
+                                                                        <div class="row row-5">
+                                                                            <div class="searchCat" id="searchTags">
+                                                                                <a></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+																	<div class="project-blocks-container">
+																		<div class="row row-5" id="searchResults">
+																			<div class="col col-xs-12 col-sm-12" id="resultPreviewBig">
+																				<div class="project-block-xl">
+																					<div class="block-image">
+																						<img id = 'selectedProjectPreview' src="Images/project-screenshot.png" class="img-responsive img-fullwidth" alt=""/>
+																					</div>
+																					<div class="block-details">
+																						<div class="block-title" id="previewTitle">
+																							<h4>Project Name 1</h4>
+																						</div>
+																						<div class="row row-5">
+																							
+																							<div class="col col-xs-7 col-sm-7">
+																								<div class="block-tags" id="previewTags">
+																									<a class="tag tag-purple">NaCl</a>
+																									<a class="tag tag-purple">Tag 1</a>
+																									<a class="tag tag-purple">Dark Crystal</a>
+																									<a class="tag tag-purple">Tag</a>
+																									<a class="tag tag-purple">Large Tag</a>
+																								</div>
+																							</div>
+																							<div class="col col-xs-5 col-sm-5">
+																								<div class="block-actions">
+																									<a id="openPreviewQR" data-toggle="modal" data-target="#qr_scan_modal" class="btn btn-primary btn-qr"><img src="Images/qr-icon-white-sm.png" class="img-responsive" alt=""/></a>
+																									<a id="openPreview" class="btn btn-primary btn-open">Open</a>
+																								</div>
+																							</div>
+
+																						</div>
+																						<div class="block-description" id="previewDescription">
+																							<p>This is the Decription of Project 2 of Lorem Ipsum proin gravida nibh vel velit auctor aliquet aenean sollicitudin, lorem quis bibendum auctor is simply dummy text of the printing typesetting industry.</p>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="browse">
+                                                                    <div class="btn-action">
+                                                                        <input id="openJSONInput" type="file" style="visibility:hidden" />
+                                                                        <a id="openJSON" class="btn btn-dark">
+                                                                            <span class="btn-image"><img src="Images/json.png" class="img-responsive" alt=""/></span>
+                                                                            <span class="btn-text">Upload JSON</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+																<div class="box-footer"></div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="tab-content-section-container">
+												<div class="tab-section-title">
+													<h3>Save a CrystalWalk Project</h3>
+												</div>
+												<div class="tab-blocks-container">
+													<div class="tab-block">
+														<div class="tab-boxes-container">
+															<div class="tab-box save-public-library-box">
+																<div class="box-head">
+																	<a class="btn_form_toggler"><span>Enter Project Details</span></a>
+																</div>
+																<div class="box-body">
+																	<div class="project-save-form-container">
+                                                                        <div class="form-group">
+                                                                            <label for="project_name">Name</label>
+                                                                            <input id="projectName" type="text" class="form-control" name="project_name" placeholder="My Project Name"/>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="tags">Tags</label>
+                                                                            <input id="projectTags" type="text" class="form-control" name="project_name" placeholder="Tags"/>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="description">Description</label>
+                                                                            <textarea id="projectDescription" name="description" class="form-control" placeholder="Write here a brief description..."></textarea>
+                                                                        </div>
+																	</div>
+																</div>
+															</div>
+															<div class="tab-box save-project-box">
+																<div class="box-head"></div>
+																<div class="box-body">
+																	<div class="project-actions-container">
+                                                                        <div class="btn-action">
+																			<a id="saveOnlinett" class="btn btn-dark btn_alternate_action_toggler">
+																				<span class="btn-image"><img src="Images/save-icon.png" class="img-responsive" alt=""/></span>
+																				<span class="btn-text">Save Online</span>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="actions-alternative-container" id="cnt_alternate_actions">
+																		<div class="actions-alternative-inner">
+																			<div class="btn-qr action-alt">
+																				<a id="openQR" class="btn btn-purple-dark" data-toggle="modal" data-target="#qr_scan_modal"><img src="Images/qr-icon-white-sm.png" class="img-responsive" alt=""/></a>
+																			</div>
+																			<div id="selectLink" class="btn-link action-alt">
+																				<label for="txt_link" class="btn btn-purple-dark"><img src="Images/attachment-icon.png" class="img-responsive" alt=""/></label>
+																			</div>
+																			<div class="txt-link action-alt">
+																				<input id="saveOnlineLink" type="url" class="form-control" name="txt_link" id="txt_link"/>
+																			</div>
+																		</div>
+																	</div>
+                                                                    <div class="project-actions-container padTop10">
+                                                                        <div class="btn-action">
+																			<a id="snapshotTT" class="btn btn-dark btn_alternate_png_toggler">
+																				<span class="btn-image"><img src="Images/snapshot.png" class="img-responsive" alt=""/></span>
+																				<span class="btn-text">Snapshot (PNG)</span>
+																			</a>
+																		</div>
+                                                                    </div>
+                                                                    <div class="actions-alternative-container" id="png_alternate_actions">
+																		<div class="actions-alternative-inner">
+																			<div class="btn-qr action-alt">
+																				<a id="lowPNG" class="btn btn-purple-dark"><img src="Images/lowPNG.png" class="img-responsive" alt=""/></a>
+																			</div>
+																			<div class="btn-qr action-alt">
+																				<a id="mediumPNG" class="btn btn-purple-dark"><img src="Images/mediumPNG.png" class="img-responsive" alt=""/></a>
+																			</div>
+                                                                            <div class="btn-qr action-alt">
+																				<a id="highPNG" class="btn btn-purple-dark"><img src="Images/highPNG.png" class="img-responsive" alt=""/></a>
+																			</div>
+																		</div>
+																	</div>
+                                                                    <div class="actions-alternative-container align-left" id="png_alternate_options">
+																		<div class="actions-alternative-inner">
+                                                                            <div class="btn-qr action-alt">
+																				<a id="print_png" class="btn btn-light"><img src="Images/print-mode.png" class="img-responsive" alt=""/></a>
+																			</div>
+																			<div class="btn-qr action-alt">
+																				<a id="qr_png" class="btn btn-light"><img src="Images/qr-icon.png" class="img-responsive" alt=""/></a>
+																			</div>
+																			<div class="btn-qr action-alt">
+																				<a id="frameIT_png" class="btn btn-light"><img src="Images/frame.png" class="img-responsive" alt=""/></a>
+																			</div>
+																		</div>
+																	</div>
+                                                                    <div class="project-actions-container padTop10">
+                                                                        <div class="btn-action">
+																			<a id="stlTT" class="btn btn-dark btn_alternate_stl_toggler">
+																				<span class="btn-image"><img src="Images/stlExport.png" class="img-responsive" alt=""/></span>
+																				<span class="btn-text">Export STL</span>
+																			</a>
+																		</div>
+                                                                    </div> 
+                                                                    <div class="actions-alternative-container" id="stl_alternate_actions">
+																		<div class="actions-alternative-inner">
+																			<div class="btn-qr action-alt">
+																				<a id="lowSTL" class="btn btn-purple-dark"><img src="Images/lowPNG.png" class="img-responsive" alt=""/></a>
+																			</div>
+																			<div class="btn-qr action-alt">
+																				<a id="mediumSTL" class="btn btn-purple-dark"><img src="Images/mediumPNG.png" class="img-responsive" alt=""/></a>
+																			</div>
+                                                                            <div class="btn-qr action-alt">
+																				<a id="highSTL" class="btn btn-purple-dark"><img src="Images/highPNG.png" class="img-responsive" alt=""/></a>
+																			</div>
+																		</div>
+																	</div>
+                                                                    <div class="project-actions-container padTop10">
+                                                                        <div class="btn-action">
+                                                                            <a id="objTT" class="btn btn-dark btn_alternate_stl_toggler">
+                                                                                <span class="btn-image"><img src="Images/stlExport.png" class="img-responsive" alt=""/></span>
+                                                                                <span class="btn-text">Export OBJ</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="actions-alternative-container" id="obj_alternate_actions">
+                                                                        <div class="actions-alternative-inner">
+                                                                            <div class="btn-qr action-alt">
+                                                                                <a id="lowResOBJ" class="btn btn-purple-dark"><img src="Images/lowPNG.png" class="img-responsive" alt=""/></a>
+                                                                            </div>
+                                                                            <div class="btn-qr action-alt">
+                                                                                <a id="mediumResOBJ" class="btn btn-purple-dark"><img src="Images/mediumPNG.png" class="img-responsive" alt=""/></a>
+                                                                            </div>
+                                                                            <div class="btn-qr action-alt">
+                                                                                <a id="highResOBJ" class="btn btn-purple-dark"><img src="Images/highPNG.png" class="img-responsive" alt=""/></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="project-actions-container padTop10">
+                                                                        <div class="btn-action">
+																			<a id="exportJSON" class="btn btn-dark">
+																				<span class="btn-image"><img src="Images/jsonPurlpe.png" class="img-responsive" alt=""/></span>
+																				<span class="btn-text">Export JSON DATA</span>
+																			</a>
+																		</div>
+																		<div class="btn-action">
+																			<a id="downloadProject" class="btn btn-dark experimental">
+																				<span class="btn-image"><img src="Images/download-icon.png" class="img-responsive" alt=""/></span>
+																				<span class="btn-text">Download to your PC</span>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+																<div class="box-footer"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane visualization-tab-pane fade" id="scrn_visualize">
+										<div class="tab-content-container">
+											<div class="tab-content-section-container">
+                                                <div class="tab-section-title">
+													<h3>UNIT CELL AND CRYSTAL MODELS REPRESENTATION</h3>
+												</div>
+												<div class="tab-blocks-container">
+                                                    
+                                                    <div class="tab-block theme-dark crystal-block">
+														<div class="block-title">
+															<h3>Crystal Model Representation</h3>
+														</div>
+														<div class="block-content">
+															<div class="btn-group" data-toggle="buttons">
+																<label id="crystalClassic" class="btn btn-light active">
+																	<img src="Images/render2.png" class="img-responsive" alt=""/>
+																	<img src="Images/render2-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="crystalSubstracted" class="btn btn-light">
+																	<img src="Images/render1.png" class="img-responsive" alt=""/>
+																	<img src="Images/render1-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="crystalSolidVoid" class="btn btn-light">
+																	<img src="Images/render-switch-icon-02.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-02-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="crystalGradeLimited" class="btn btn-light">
+																	<img src="Images/render-switch-icon-04.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-04-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+															</div>
+														</div>
+													</div>
+                                                    <div class="tab-block theme-light unit-block">
+														<div class="block-title">
+															<h3>Unit Cell Model Representation</h3>
+														</div>
+														<div class="block-content">
+															<div class="btn-group" data-toggle="buttons">
+																<label id="cellClassic" class="btn btn-light active">
+																	<img src="Images/render2.png" class="img-responsive" alt=""/>
+																	<img src="Images/render2-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="cellSubstracted" class="btn btn-light">
+																	<img src="Images/render1.png" class="img-responsive" alt=""/>
+																	<img src="Images/render1-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="cellSolidVoid" class="btn btn-light">
+																	<img src="Images/render-switch-icon-02.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-02-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="cellGradeLimited" class="btn btn-light">
+																	<img src="Images/render-switch-icon-04.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-04-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+															</div>
+														</div>
+													</div>
+													<div class="tab-block theme-dark screen-color-block">
+														<div class="block-title">
+															<h3>INTERFACE COLOR CUSTOMIZATION</h3>
+														</div>
+														<div class="block-content">
+															<div class="screen-color-btns">
+																<div class="row row-3">
+																	
+																	<div class="col col-xs-6 col-sm-6">
+																		<div class="btn-screen">
+																			<a class="btn btn-primary-dark btn-block padLeft9">
+																				<div class="btn-text">
+																					<p>Crystal Screen</p>
+																				</div>
+																				<div id="crystalScreenColor" class="color-picker color-picker-lg theme-01 bg-purple">
+																					<div class="color"></div>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="col col-xs-6 col-sm-6">
+																		<div class="btn-screen">
+																			<a class="btn btn-primary-dark btn-block padLeft9">
+																				<div class="btn-text">
+																					<p>Cell Screen</p>
+																				</div>
+																				<div id="cellScreenColor" class="color-picker color-picker-lg theme-01 bg-purple">
+																					<div class="color"></div>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="col col-xs-6 col-sm-6">
+																		<div class="btn-screen">
+																			<a class="btn btn-primary-dark btn-block padLeft9">
+																				<div class="btn-text">
+																					<p>Motif X Screen</p>
+																				</div>
+																				<div id="motifXScreenColor" class="color-picker color-picker-lg theme-01 bg-purple">
+																					<div class="color"></div>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="col col-xs-6 col-sm-6">
+																		<div class="btn-screen">
+																			<a class="btn btn-primary-dark btn-block padLeft9">
+																				<div class="btn-text">
+																					<p>Motif Y Screen</p>
+																				</div>
+																				<div id="motifYScreenColor" class="color-picker color-picker-lg theme-01 bg-purple">
+																					<div class="color"></div>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="col col-xs-6 col-sm-6">
+																		<div class="btn-screen">
+																			<a class="btn btn-primary-dark btn-block padLeft9">
+																				<div class="btn-text">
+																					<p>Motif Z Screen</p>
+																				</div>
+																				<div id="motifZScreenColor" class="color-picker color-picker-lg theme-01 bg-purple">
+																					<div class="color"></div>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+                                                                    <div class="col col-xs-6 col-sm-6">
+																		<div class="btn-screen">
+																			<a class="btn btn-primary-dark btn-block padLeft9">
+																				<div class="btn-text">
+																					<p>Screen Mode</p>
+																				</div>
+																				<div id="screenMode" class="color-picker color-picker-lg theme-01 bg-purple">
+																					<div class="color"></div>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+                                                                    <div class="col col-xs-6 col-sm-6">
+																		<div class="btn-screen">
+																			<a class="btn btn-primary-dark btn-block padLeft9">
+																				<div class="btn-text">
+																					<p>Print Mode</p>
+																				</div>
+																				<div id="printMode" class="color-picker color-picker-lg theme-01 bg-purple">
+																					<div class="color"></div>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+													</div>
+                                                    
+                                                </div>
+                                                
+                                                <div class="tab-section-title">
+													<h3>3D RENDERING PARAMETERS</h3>
+												</div>
+												<div class="tab-blocks-container">
+                                                    
+                                                    <div class="tab-block theme-dark renderization-quality-block">
+														<div class="block-title">
+															<h3>RENDERING PRESETS</h3>
+														</div>
+														<div class="block-content">
+															<div class="btn-group" data-toggle="buttons">
+                                                                <label id="autoRenderizationQuality" class="btn-label btn btn-light">
+																	AUTO
+																</label>
+																<label id="lowRenderizationQuality" class="btn-label btn btn-light">
+																	LOW
+																</label>
+																<label id="mediumRenderizationQuality" class="btn-label btn btn-light active">
+																	MEDIUM
+																</label>
+																<label id="highRenderizationQuality" class="btn-label btn btn-light">
+																	HIGH
+																</label>
+															</div>
+														</div>
+													</div>
+                                                    <div class="tab-block theme-light renderization-quality-block">
+														<div class="block-title">
+															<h3>3D OBJECTS LEVEL OF DETAIL (LOD)</h3>
+														</div>
+                                                        <div class="lod-container">
+															<div class="row row-10">
+																<div class="col col-xs-2 col-sm-2">
+                                                                    <div class="block-content lodLabel">
+                                                                        <div class="slider-input form-group-input">
+                                                                            <input id="lod" type="text" name="txt_visualize_color_density" id="txt_visualize_color_density" class="form-control"/>
+                                                                        </div>
+                                                                    </div>
+																</div>
+																<div class="col col-xs-6 col-sm-6">
+																	<div class="sliders-container density-slider-container pad15">
+																		<div class="slider-group form-group density-slider theme-light">
+																			<div class="slider-control slider-control-sm">
+																				<div class="slider" id="lodSlider"></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-block theme-dark renderization-block">
+														<div class="block-title">
+															<h3>3D RENDERING CUSTOM MODES, SHADERS AND EFFECTS </h3>
+														</div>
+														<div class="block-content">
+															<div class="btn-group" data-toggle="buttons">
+																<label id="wireframe" class="btn btn-light">
+																	<img src="Images/render-switch-icon-01.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-01-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="toon" class="btn btn-light">
+																	<img src="Images/render-switch-icon-02.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-02-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="flat" class="btn btn-light">
+																	<img src="Images/render-switch-icon-03.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-03-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="realistic" class="btn btn-light active">
+																	<img src="Images/render-switch-icon-04.png" class="img-responsive" alt=""/>
+																	<img src="Images/render-switch-icon-04-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <br />
+                                                                <label id="lights" class="margTop10 btn btn-light active">
+																	<img src="Images/lights-icon.png" class="img-responsive" alt=""/>
+                                                                    <img src="Images/lights-icon-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="ssao" class="margTop10 btn btn-light experimental">
+																	<img src="Images/lights-icon.png" class="img-responsive" alt=""/>
+                                                                    <img src="Images/lights-icon-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="shadows" class="margTop10 btn btn-light active experimental">
+																	<img src="Images/lights-icon.png" class="img-responsive" alt=""/>
+                                                                    <img src="Images/lights-icon-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+															</div>
+														</div>
+													</div>
+                                                </div>
+                                                
+                                                <div class="tab-section-title">
+													<h3>STEREOSCOPY, SPATIAL SOUND AND ADVANCED HID</h3>
+												</div>
+												<div class="tab-blocks-container">
+                                                    
+													<div class="tab-block theme-dark visualization-block">
+														<div class="block-title">
+															<h3>PERSPECTIVE MODE</h3>
+														</div>
+														<div class="block-content">
+															<div class="btn-group" data-toggle="buttons">
+																<label id="distortionOn" class="btn btn-light">
+																	<img src="Images/visual-switch-icon-01.png" class="img-responsive" alt=""/>
+																	<img src="Images/visual-switch-icon-01-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+																<label id="distortionOff" class="btn btn-light active">
+																	<img src="Images/visual-switch-icon-02.png" class="img-responsive" alt=""/>
+																	<img src="Images/visual-switch-icon-02-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+															</div>
+														</div>
+													</div>                                                 
+													<div class="tab-block theme-light stereoscopic-block">
+														<div class="row row-5">
+															
+															<div class="col col-xs-7 col-sm-7">
+																<div class="block-title">
+																	<h3>FOCAL POINT MODE</h3>
+																</div>
+																<div class="block-content">
+																	<div class="btn-group" data-toggle="buttons">
+																		<label id="crystalCamTargetOn" class="btn btn-light active">
+																			
+																			<img src="Images/focal-point-switch-icon-01.png" class="img-responsive" alt=""/>
+																			<img src="Images/focal-point-switch-icon-01-hover.png" class="img-responsive hover" alt=""/>
+																		</label>
+																		<label id="crystalCamTargetOff" class="btn btn-light">
+																			
+																			<img src="Images/focal-point-switch-icon-02.png" class="img-responsive" alt=""/>
+																			<img src="Images/focal-point-switch-icon-02-hover.png" class="img-responsive hover" alt=""/>
+																		</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-block theme-dark stereoscopic-block">
+														<div class="block-title">
+															<label for="chkbx_stereoscope">
+																<h3>CRYSTAL STEREOSCOPIC MODE</h3>
+															</label>
+														</div>
+														<div class="block-content">
+															<div class="btn-group" data-toggle="buttons">
+																<label id="anaglyph" class="btn btn-light experimental">
+																	<img src="Images/stereoscope-switch-icon-01.png" class="img-responsive" alt=""/>
+																	<img src="Images/stereoscope-switch-icon-01-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="oculus" class="btn btn-light experimental">
+																	<img src="Images/stereoscope-switch-icon-02-hover.png" class="img-responsive" alt=""/>
+																	<img src="Images/stereoscope-switch-icon-02.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="3DsideBySide" class="btn btn-light experimental">
+																	<img src="Images/sideBySide.png" class="img-responsive" alt=""/>
+																	<img src="Images/sideBySide-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="3DonTop" class="btn btn-light experimental">
+																	<img src="Images/onTop.png" class="img-responsive" alt=""/>
+																	<img src="Images/onTop-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+															</div>
+														</div>
+													</div>
+                                                    <div class="tab-block theme-light stereoscopic-block">
+														<div class="block-title">
+															<label for="chkbx_stereoscope">
+																<h3>UNIT CELL  STEREOSCOPIC MODE</h3>
+															</label>
+														</div>
+														<div class="block-content">
+															<div class="btn-group" data-toggle="buttons">
+																<label id="anaglyphCell" class="btn btn-light experimental">
+																	<img src="Images/stereoscope-switch-icon-01.png" class="img-responsive" alt=""/>
+																	<img src="Images/stereoscope-switch-icon-01-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="oculusCell" class="btn btn-light experimental">
+																	<img src="Images/stereoscope-switch-icon-02-hover.png" class="img-responsive" alt=""/>
+																	<img src="Images/stereoscope-switch-icon-02.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="3DsideBySideCell" class="btn btn-light experimental">
+																	<img src="Images/sideBySide.png" class="img-responsive" alt=""/>
+																	<img src="Images/sideBySide-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+                                                                <label id="3DonTopCell" class="btn btn-light experimental">
+																	<img src="Images/onTop.png" class="img-responsive" alt=""/>
+																	<img src="Images/onTop-hover.png" class="img-responsive hover" alt=""/>
+																</label>
+															</div>
+														</div>
+													</div>
+                                                    
+													<div class="tab-block theme-dark hit-block">
+														<div class="block-title">
+															<h3>Human Interaction Interfaces</h3>
+														</div>
+														<div class="block-content">
+															<div class="btn-hit">
+																<a id="leapMotion" class="btn btn-light experimental" data-toggle="button" aria-pressed="false" autocomplete="off">
+																	<img src="Images/leap-icon.png" class="img-responsive" alt=""/>
+																	<img src="Images/leap-icon-hover.png" class="img-responsive hover" alt=""/>
+																</a>
+                                                                <a id="oculusTracker" class="btn btn-light experimental" data-toggle="button" aria-pressed="false" autocomplete="off">
+																	<img src="Images/stereoscope-switch-icon-02.png" class="img-responsive" alt=""/>
+																	<img src="Images/stereoscope-switch-icon-02-hover.png" class="img-responsive hover" alt=""/>
+																</a>
+                                                                <a id="cardboard" class="btn btn-light experimental" data-toggle="button" aria-pressed="false" autocomplete="off">
+																	<img src="Images/stereoscope-switch-icon-03.png" class="img-responsive" alt=""/>
+																	<img src="Images/stereoscope-switch-icon-03-hover.png" class="img-responsive hover" alt=""/>
+																</a>
+															</div>
+                                                        </div>
+													</div>
+                                                    
+                                                    
+													<div class="tab-block theme-light sound-dark-block">
+														<div class="block-title">
+															<h3>SPATIAL SOUND</h3>
+														</div>
+                                                        <div class="sounds-container">
+															<div class="row row-10">
+																<div class="col col-xs-3 col-sm-3">
+                                                                    <div class="block-content">
+                                                                        <div class="btn-group" data-toggle="buttons">
+                                                                            <label id="sounds" class="btn btn-light experimental">
+                                                                                <img src="Images/sound-icon-hover.png" class="img-responsive" alt=""/>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+																</div>
+																<div class="col col-xs-6 col-sm-6">
+																	<div class="sliders-container density-slider-container">
+																		<div class="slider-group form-group density-slider theme-light">
+																			<div class="slider-control slider-control-sm">
+																				<div class="slider" id="soundSlider"></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+                                                                <div class="col col-xs-2 col-sm-2">
+                                                                    <div id="muteSound"></div>
+                                                                </div>
+															</div>
+														</div>
+													</div>
+                                                    
+                                                    
+													<div class="tab-block theme-dark color-properties-block">
+                                                        <div class="block-title">
+															<h3>SPATIAL FOG</h3>
+														</div>
+														<div class="color-properties-container">
+															<div class="row row-10">
+																
+																<div class="col col-xs-3 col-sm-3">
+																	<div class="color-picker-container">
+																		<div class="color-label form-group-label">
+																			<label for="txt_visualize_color">
+																				<input name="fog" type="checkbox" class="icheckbox" id="txt_visualize_color" name="txt_visualize_color" />
+																				Fog Color
+																			</label>
+																		</div>
+																		<div id="fogColor" class="color-picker color-picker-lg theme-01 bg-transparent">
+																			<div class="color"></div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col col-xs-9 col-sm-9">
+																	<div class="sliders-container density-slider-container">
+																		<div class="slider-group form-group density-slider theme-light">
+																			<div class="slider-detail">
+																				<div class="slider-label form-group-label">
+																					<label for="txt_visualize_color_density">Density</label>
+																				</div>
+																				<div class="slider-input form-group-input">
+																					<input id="fogDensity" type="text" name="txt_visualize_color_density" id="txt_visualize_color_density" class="form-control"/>
+																				</div>
+																			</div>
+																			<div class="slider-control slider-control-sm">
+																				<div class="slider" id="fogDensitySlider"></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div> 
+
+											<div class="tab-content-section-container">
+												<div class="tab-section-title">
+													<h3>visualization tools</h3>
+												</div>
+												<div class="tab-blocks-container">
+                                                    <div class="tab-block theme-dark">
+														<div class="block-title">
+															<h3>Menu Zoom</h3>
+														</div>
+														<div class="block-content zoomOption">
+                                                            <label id="autoZoom" class="btn btn-light active">Auto</label>
+                                                            <label id="zoom100" class="btn btn-light">100%</label>
+                                                            <label id="zoom90" class="btn btn-light">90%</label>
+                                                            <label id="zoom80" class="btn btn-light">80%</label>
+                                                            <label id="zoom70" class="btn btn-light">70%</label>
+														</div>
+													</div>
+													<div class="tab-block theme-light sound-light-block">
+														<div class="row row-10">
+															<div class="col col-xs-6 col-sm-6">
+																<div class="block-title">
+																	<h3>Reset everything</h3>
+																</div>
+																<div class="block-content">
+																	<div class="btn-reset">
+																		<a id="reset" class="btn btn-primary-dark"><img src="Images/reset-icon.png" class="img-responsive" alt=""/></a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+        
+        <!-- Modals -->
+        <section class="modals-container">
+			<article class="bravais-lattice-modal-container">
+				<div class="modal fade bravais-lattice-modal custom_scrollbar" id="bravais_lattice_modal" tabindex="-1" role="dialog" aria-labelledby="bravais_lattice_modalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header mega-header">
+								<div class="modal-title-container">
+									<h2 id="periodic_table_modalLabel">Bravais Lattice</h2>
+								</div>
+								<div class="btn-close">
+									<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+									</button>
+								</div>
+							</div>
+							<div class="modal-body">
+								<div class="bravais-lattice-table-container">
+									<table class="table table-bordered bravais-lattice-table">
+										<thead>
+											<tr>
+												<th>Triclinic </th>
+												<th>Cubic </th>
+												<th>Tetragonal </th>
+												<th>Orthorhombic </th>
+												<th>Rhombohedral </th>
+												<th>Hexagonal </th>
+												<th>Monoclinic </th>
+											</tr>
+                                            <tr class="conditions">
+                                                <th>α,β,γ ≠ 90°</th>
+                                                <th></th>
+                                                <th>a ≠ c</th>
+                                                <th>a ≠ b ≠ c</th>
+                                                <th>α = β = γ ≠ 90°</th>
+                                                <th></th>
+                                                <th>β ≠ 90°, α,γ = 90°</th>
+                                            </tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="triclinic_primitive">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-05.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Simple</span>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="cubic_primitive">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-07.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Simple</span>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="tetragonal_primitive">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-02.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Simple</span>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="orthorhombic_primitive">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-01.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Simple</span>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="rhombohedral_primitive">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-04.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Simple</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="hexagonal_primitive">
+                                                    <div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-15.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Primitive</span>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="monoclinic_primitive">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-03.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Simple</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="cubic_body_centered">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-10.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Body-centered</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="tetragonal_body_centered">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-08.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Body-centered</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="orthorhombic_body_centered">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-09.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Body-centered</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+                                                <td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="hexagonal">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-06.png" class="img-responsive" alt=""/>
+														</div>
+													</div>
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+											</tr>
+											<tr>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="cubic_face_centered">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-12.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Face-centered</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="orthorhombic_face_centered">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-11.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Face-centered</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+											</tr>
+											<tr>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="orthorhombic_base_centered">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-14.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Base-centered</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td class="mh_bravais_lattice_block empty" data-mh="mh_bravais_lattice_block">
+													<!-- Blank -->
+												</td>
+												<td data-dismiss="modal" class="mh_bravais_lattice_block" data-mh="mh_bravais_lattice_block" id="monoclinic_base_centered">
+													<div class="bravais-lattice-block">
+														<div class="block-image">
+															<img src="Images/bravais-lattice-img-13.png" class="img-responsive" alt=""/>
+														</div>
+														<div class="block-title">
+															<h4>
+																<span>Base-centered</span><br/>
+															</h4>
+														</div>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<article class="periodic-table-modal-container">
+				<div class="modal fade periodic-table-modal custom_scrollbar" id="periodic_table_modal" tabindex="-1" role="dialog" aria-labelledby="periodic_table_modalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header mega-header" id="periodicModalHeader">
+								<div class="modal-title-container">
+									<h2 id="periodic_table_modalLabel">Periodic Table</h2>
+								</div>
+								<div class="btn-close">
+									<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+									</button>
+								</div>
+							</div>
+							<div class="modal-body">
+								<div class="periodic-table-container">
+									<table class="table periodic-table">
+										<tbody>
+											<tr>
+												<td class="ch dark border ch-h">H</td>
+												<td colspan="16"></td>
+												<td class="ch dark ch-he">He</td>
+											</tr>
+											<tr>
+												<td class="ch dark ch-li">Li</td>
+												<td class="ch dark ch-be">Be</td>
+												<td colspan="10"></td>
+												<td class="ch dark ch-b">B</td>
+												<td class="ch dark ch-c">C</td>
+												<td class="ch dark ch-n">N</td>
+												<td class="ch dark ch-o">O</td>
+												<td class="ch dark ch-f">F</td>
+												<td class="ch dark ch-ne">Ne</td>
+											</tr>
+											<tr>
+												<td class="ch dark ch-na">Na</td>
+												<td class="ch dark ch-mg">Mg</td>
+												<td colspan="10"></td>
+												<td class="ch dark ch-al">Al</td>
+												<td class="ch dark ch-si">Si</td>
+												<td class="ch dark ch-p">P</td>
+												<td class="ch dark ch-s">S</td>
+												<td class="ch dark ch-cl">Cl</td>
+												<td class="ch dark ch-ar">Ar</td>
+											</tr>
+											<tr>
+												<td class="ch dark ch-k">K</td>
+												<td class="ch dark ch-ca">Ca</td>
+												<td class="ch dark ch-sc">Sc</td>
+												<td class="ch dark ch-ti">Ti</td>
+												<td class="ch dark ch-v">V</td>
+												<td class="ch dark ch-cr">Cr</td>
+												<td class="ch dark ch-mn">Mn</td>
+												<td class="ch dark ch-fe">Fe</td>
+												<td class="ch dark ch-co">Co</td>
+												<td class="ch dark ch-ni">Ni</td>
+												<td class="ch dark ch-cu">Cu</td>
+												<td class="ch dark ch-zn">Zn</td>
+												<td class="ch dark ch-ga">Ga</td>
+												<td class="ch dark ch-ge">Ge</td>
+												<td class="ch dark ch-as">As</td>
+												<td class="ch dark ch-se">Se</td>
+												<td class="ch dark ch-br">Br</td>
+												<td class="ch dark ch-kr">Kr</td>
+											</tr>
+											<tr>
+												<td class="ch dark ch-rb">Rb</td>
+												<td class="ch dark ch-sr">Sr</td>
+												<td class="ch dark ch-y">Y</td>
+												<td class="ch dark ch-zr">Zr</td>
+												<td class="ch dark ch-nb">Nb</td>
+												<td class="ch dark ch-mo">Mo</td>
+												<td class="ch dark ch-tc">Tc</td>
+												<td class="ch dark ch-ru">Ru</td>
+												<td class="ch dark ch-rh">Rh</td>
+												<td class="ch dark ch-pd">Pd</td>
+												<td class="ch dark ch-ag">Ag</td>
+												<td class="ch dark ch-cd">Cd</td>
+												<td class="ch dark ch-in">In</td>
+												<td class="ch dark ch-sn">Sn</td>
+												<td class="ch dark ch-sb">Sb</td>
+												<td class="ch dark ch-te">Te</td>
+												<td class="ch dark ch-i">I</td>
+												<td class="ch dark ch-xe">Xe</td>
+											</tr>
+											<tr>
+												<td class="ch light ch-cs">Cs</td>
+												<td class="ch dark ch-ba">Ba</td>
+												<td class="ch dark disabled ch-l">
+													<span>L*</span>
+												</td>
+												<td class="ch dark ch-hf">Hf</td>
+												<td class="ch dark ch-ta">Ta</td>
+												<td class="ch dark ch-w">W</td>
+												<td class="ch dark ch-re">Re</td>
+												<td class="ch dark ch-os">Os</td>
+												<td class="ch dark ch-ir">Ir</td>
+												<td class="ch dark ch-pt">Pt</td>
+												<td class="ch dark ch-au">Au</td>
+												<td class="ch dark ch-hg">Hg</td>
+												<td class="ch dark ch-tl">Tl</td>
+												<td class="ch dark ch-pb">Pb</td>
+												<td class="ch dark ch-bi">Bi</td>
+												<td class="ch dark ch-po">Po</td>
+												<td class="ch dark ch-at">At</td>
+												<td class="ch dark ch-rn">Rn</td>
+											</tr>
+											<tr>
+												<td class="ch light ch-fr">Fr</td>
+												<td class="ch dark ch-ra">Ra</td>
+												<td class="ch dark disabled ch-a">
+													<span>A*</span>
+												</td>
+												<td class="ch dark ch-rf">Rf</td>
+												<td class="ch dark ch-db">Db</td>
+												<td class="ch dark ch-sg">Sg</td>
+												<td class="ch dark ch-bh">Bh</td>
+												<td class="ch dark ch-hs">Hs</td>
+												<td class="ch dark ch-mt">Mt</td>
+												<td colspan="9"></td>
+											</tr>
+											<tr>
+												<td colspan="18"></td>
+											</tr>
+											<tr>
+												<td></td>
+												<th>
+													<span>L</span>
+												</th>
+												<td class="ch dark ch-la">La</td>
+												<td class="ch dark ch-ce">Ce</td>
+												<td class="ch dark ch-pr">Pr</td>
+												<td class="ch dark ch-nd">Nd</td>
+												<td class="ch dark ch-pm">Pm</td>
+												<td class="ch dark ch-sm">Sm</td>
+												<td class="ch dark ch-eu">Eu</td>
+												<td class="ch dark ch-gd">Gd</td>
+												<td class="ch dark ch-tb">Tb</td>
+												<td class="ch dark ch-dy">Dy</td>
+												<td class="ch dark ch-ho">Ho</td>
+												<td class="ch dark ch-er">Er</td>
+												<td class="ch dark ch-tm">Tm</td>
+												<td class="ch dark ch-yb">Yb</td>
+												<td class="ch dark ch-lu">Lu</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td></td>
+												<th>
+													<span>A</span>
+												</th>
+												<td class="ch dark ch-ac">Ac</td>
+												<td class="ch dark ch-th">Th</td>
+												<td class="ch dark ch-pa">Pa</td>
+												<td class="ch dark ch-u">U</td>
+												<td class="ch dark ch-np">Np</td>
+												<td class="ch dark ch-pu">Pu</td>
+												<td class="ch dark ch-am">Am</td>
+												<td class="ch dark ch-cm">Cm</td>
+												<td class="ch dark ch-bk">Bk</td>
+												<td class="ch dark ch-cf">Cf</td>
+												<td class="ch dark ch-es">Es</td>
+												<td class="ch dark disabled ch-fm">Fm</td>
+												<td class="ch dark disabled ch-md">Md</td>
+												<td class="ch dark disabled ch-no">No</td>
+												<td class="ch dark disabled ch-lr">Lr</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="modal-pre-footer" id="modalPreFooter">
+								<div class="periodic-table-type-container cnt-hidden">
+									<div class="periodic-table-type-wrapper">
+										<div class="block-title">
+											<h4>Select the Periodic Table type: </h4>
+										</div>
+										<div class="block-content">
+												<div class="row row-nopad row-type">
+													
+													<div class="col col-xs-4 col-sm-4">
+														<div class="btn-table-type modal-btn">
+															<a class="btn btn-primary btn-block">Atomic</a>
+														</div>
+													</div>
+													<div class="col col-xs-4 col-sm-4">
+														<div class="btn-table-type modal-btn">
+															<a class="btn btn-primary btn-block">Ionic</a>
+														</div>
+													</div>
+													<div class="col col-xs-4 col-sm-4">
+														<div class="btn-table-type modal-btn">
+															<a class="btn btn-primary btn-block">3rd Option</a>
+														</div>
+													</div>
+
+												</div>
+										</div>
+									</div>
+								</div>
+								<div class="select-atom-properties-container">
+									<div class="select-atom-properties-inner">
+										<div class="element" id="tempSelection">
+											<p class="ch dark ch-na">?</p>
+										</div>
+										<div class="element-properties-blocks">
+                                            <div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>≡</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+                                            <div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>-3</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+                                            <div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>-2</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+                                            <div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>-1</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>0</p>
+													</div>
+													<div class="resolution">
+														<p>- &Aring;</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+1</p>
+													</div>
+													<div class="resolution">
+														<p>- &Aring;</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+2</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+3</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+4</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+5</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+6</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+											<div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+7</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+                                            <div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>+8</p>
+													</div>
+													<div class="resolution">
+														<p>-</p>
+													</div>
+												</a>
+											</div>
+                                            <div class="property-block disabled" data-dismiss="modal">
+												<a>
+													<div class="serial">
+														<p>Custom</p>
+													</div>
+													<div class="resolution">
+														<p contenteditable="true"></p>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<article class="qr-modal-container">
+				<div class="modal fade custom_scrollbar" id="qr_scan_modal" tabindex="-1" role="dialog" aria-labelledby="qr_scan_modalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<div class="header-image">
+									<img src="Images/qr-icon-white-sm.png" class="img-responsive" alt=""/>
+								</div>
+								<div class="header-title">
+									<h3>Scan the code with you phone</h3>
+								</div>
+							</div>
+							<div class="modal-body">
+								<div class="row row-5">
+									
+									<div class="col col-xs-6 col-sm-6">
+										<div id="QRImage" class="qr-image-container">
+											
+										</div>
+									</div>
+									<div class="col col-xs-6 col-sm-6">
+										<div class="qr-actions-container">
+											<div class="btn-save">
+												<a href="" id="downloadQR" download="QRImage" class="btn btn-dark-02">Save Image</a>
+											</div>
+											<div class="alternate-actions">
+												<div id="selectLinkQR" class="btn-link action-alt">
+													<label for="txt_link_popup" class="btn btn-purple-dark"><img src="Images/attachment-icon.png" class="img-responsive" alt=""/></label>
+												</div>
+												<div class="txt-link action-alt">
+													<input id="saveOnlineLinkQR" type="url" class="form-control" name="txt_link_popup" id="txt_link_popup"/>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-dark-02" data-dismiss="modal">Ok</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+            
+            <!-- Error Modal -->
+			<article class="bravais-lattice-modal-container">
+				<div class="modal fade bravais-lattice-modal" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="bravais_lattice_modalLabel">
+					<div class="modal-dialog" role="document" id="errorModalDialog">
+						<div class="modal-content">
+							<div class="modal-header mega-header" id="errorHeader">
+                                <div class="header-image" id="errorIcon">
+									<img src="Images/error.png" class="img-responsive" alt=""/>
+								</div>
+								<div class="modal-title-container" id="errorLabel">
+									<h2>Error 404</h2>
+								</div>
+								<div class="btn-close">
+									<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+									</button>
+								</div>
+							</div>
+                            
+							<div class="modal-body">
+								<p id="errorMessage">Error 404 Beer not found!</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-dark-02" data-dismiss="modal">Ok</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+            
+            <!-- Information Modal -->
+            <article class="bravais-lattice-modal-container">
+				<div class="modal fade bravais-lattice-modal" id="info_modal" tabindex="-1" role="dialog" aria-labelledby="bravais_lattice_modalLabel">
+					<div class="modal-dialog" role="document" id="infoModalDialog">
+						<div class="modal-content">
+							<div class="modal-header mega-header" id="infoHeader">
+                                <div class="header-image" id="infoIcon">
+									<img src="Images/information.png" class="img-responsive" alt=""/>
+								</div>
+								<div class="modal-title-container" id="infoLabel">
+									<h2>Information</h2>
+								</div>
+								<div class="btn-close">
+									<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+									</button>
+								</div>
+							</div>
+                            
+							<div class="modal-body">
+								<p id="infoMessage">Error 404 Beer not found!</p>
+							</div>
+							<div class="modal-footer"> 
+								<button type="button" id="continueInfo" class="btn btn-dark-02" data-dismiss="modal">Continue</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+            
+            <article class="bravais-lattice-modal-container">
+                <div class="modal fade bravais-lattice-modal" id="info_modal_Tut" tabindex="-1" role="dialog" aria-labelledby="bravais_lattice_modalLabel">
+                    <div class="modal-dialog" role="document" id="infoModalDialog">
+                        <div class="modal-content">
+                            <div class="modal-header mega-header" id="infoHeader">
+                                <div class="header-image" id="infoIcon">
+                                    <img src="Images/information.png" class="img-responsive" alt=""/>
+                                </div>
+                                <div class="modal-title-container" id="infoLabelTut">
+                                    <h2>Welcome to CrystalWalk</h2>
+                                </div>
+                                <div class="btn-close">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <p id="infoMessage">Error 404 Beer not found!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="doNotShowAgain" class="btn btn-dark-02" data-dismiss="modal">OK, I GOT IT</button>
+                                <button type="button" id="tutorial" class="btn btn-dark-02" data-dismiss="modal">Step-by-step Tutorial</button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <!-- Warning Modal -->
+            <article class="bravais-lattice-modal-container">
+				<div class="modal fade bravais-lattice-modal" id="warning_modal" tabindex="-1" role="dialog" aria-labelledby="bravais_lattice_modalLabel">
+					<div class="modal-dialog" role="document" id="warningModalDialog">
+						<div class="modal-content">
+							<div class="modal-header mega-header" id="warningHeader">
+                                <div class="header-image" id="warningIcon">
+									<img src="Images/error.png" class="img-responsive" alt=""/>
+								</div>
+								<div class="modal-title-container" id="warningLabel">
+									<h2>Warning</h2>
+								</div>
+								<div class="btn-close">
+									<button type="button" id="closeWarning" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><img src="Images/close-icon-white.png" class="imgClose img-responsive" alt=""/></span>
+									</button>
+								</div>
+							</div>
+                            
+							<div class="modal-body">
+								<p id="warningMessage">Error 404 Beer not found!</p>
+							</div>
+							<div class="modal-footer">
+								<button id="cancelWarning" type="button" class="btn btn-dark-02" data-dismiss="modal">Cancel</button>
+                                <button id="continueWarning" type="button" class="btn btn-dark-02" data-dismiss="modal">OK</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article> 
+		</section>
+        
+        <!-- secret menu - to be deleted -->
+
+        <div id = 'logg' style = 'position:fixed; left : 0px; top:0px; z-index : 101; color:#ffffff; height : 30px; width : 300px;font-size : 10px;'></div>
+        
+        <div id="secretMenu" style="display:none; background-color : #000;z-index : 100; position : fixed; border : 2px #fff dashed; " >
+            <div id='blue1'></div>
+            <div id='blue2'></div>
+            <div id='red1'></div>
+            <div id='red2'></div>
+            <div id='colorPickerBlueWrapper'><input type='text' id="colorPickerBlue" style="display:none;"/></div>
+            <div id='colorPickerRedWrapper'><input type='text' id="colorPickerRed" style="display:none;"/></div>
+             
+        </div>
+         
+        <!-- secret menu - to be deleted --> 
+
+	</body>
+    <div id="toPNGExport"> </div>
+    <!-- Main Script -->
+        <script data-main="scripts/main" src="vendor/require.js"></script> <!-- loads main.js file -->
+</html>

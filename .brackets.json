@@ -1,0 +1,5 @@
+{
+    "jscodehints.detectedExclusions": [
+        "../vendor/OculusRiftEffect.js"
+    ]
+}
